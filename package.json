@@ -1,0 +1,60 @@
+{
+  "name": "typescript-rest-jwt",
+  "version": "1.0.0",
+  "description": "JWT authentication for typescript-rest via decorators.",
+  "main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
+  "scripts": {
+    "prepublish": "rimraf ./lib && rimraf ./dist && tsc -d",
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacob-ebey/typescript-rest-jwt.git"
+  },
+  "keywords": [
+    "typescript",
+    "library",
+    "module",
+    "authoring"
+  ],
+  "author": "Jacob Ebey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jacob-ebey/typescript-rest-jwt/issues"
+  },
+  "homepage": "https://github.com/jacob-ebey/typescript-rest-jwt#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "express-jwt": "^5.3.1",
+    "typescript-rest": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/express-jwt": "^0.0.38",
+    "@types/jest": "^22.2.2",
+    "awesome-typescript-loader": "^3.1.2",
+    "jest": "^22.4.3",
+    "rimraf": "^2.5.2",
+    "ts-jest": "^22.4.2",
+    "ts-node": "^2.1.0",
+    "ts-sinon": "^1.0.12",
+    "tslint-config-standard": "^7.0.0",
+    "typescript": "^2.1.0",
+    "webpack": "^2.2.0",
+    "webpack-dev-server": "^2.2.0"
+  }
+}
