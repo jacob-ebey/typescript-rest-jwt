@@ -2,6 +2,7 @@ TypeScript Rest JWT
 ===
 
 [![CircleCI](https://circleci.com/gh/jacob-ebey/typescript-rest-jwt.svg?style=svg)](https://circleci.com/gh/jacob-ebey/typescript-rest-jwt)
+[![Coverage Status](https://coveralls.io/repos/github/jacob-ebey/typescript-rest-jwt/badge.svg)](https://coveralls.io/github/jacob-ebey/typescript-rest-jwt)
 
 JWT authentication for typescript-rest via decorators.
 
