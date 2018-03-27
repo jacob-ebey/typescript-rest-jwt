@@ -1,7 +1,17 @@
-import { Request } from 'express'
-import { AuthHandler } from '../'
+import { Application, Request } from 'express'
+import { AuthHandler, AuthPath } from '../'
+import * as expressJWT from 'express-jwt'
 
-describe('AuhtHandler', () => {
+jest.mock('express-jwt', () => jest.fn())
+
+export class RootController {
+  @AuthPath('/')
+  public sayHello (): void {
+    // rofl to stop tslint yelling at empty blocks
+  }
+}
+
+describe('AuthHandler', () => {
   const token = 'RoflToken'
 
   it('Should parse token from headers', () => {
@@ -90,5 +100,33 @@ describe('AuhtHandler', () => {
     const parsed: string = ops.getToken!(new RequestMock())
 
     expect(parsed).toBeUndefined()
+  })
+
+  it('Should use default options when string', () => {
+    const AppMock = jest.fn<Application>(() => ({
+      use: jest.fn()
+    }))
+
+    const app = new AppMock()
+
+    AuthHandler.configure(app, 'rofl')
+
+    expect(expressJWT).toHaveBeenCalledWith(expect.any(Object))
+  })
+
+  it('Should use provided options when object', () => {
+    const AppMock = jest.fn<Application>(() => ({
+      use: jest.fn()
+    }))
+
+    const app = new AppMock()
+
+    const ops = {
+      secret: 'rofl'
+    }
+
+    AuthHandler.configure(app, ops)
+
+    expect(expressJWT).toHaveBeenCalledWith(ops)
   })
 })

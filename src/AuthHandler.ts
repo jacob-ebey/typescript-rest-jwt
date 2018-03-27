@@ -49,10 +49,9 @@ export class AuthHandler {
       : options
 
     AuthHandler.cache.forEach((cache: ICache) => {
+      // tslint:disable-next-line forin
       for (const route in cache) {
-        if (cache.hasOwnProperty(route)) {
-          app.use(cache[route], expressJWT(ops))
-        }
+        app.use(cache[route], expressJWT(ops))
       }
     })
   }
