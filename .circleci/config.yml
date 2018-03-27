@@ -25,9 +25,6 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      
-      - persist_to_workspace:
-          root: ~/repo
 
   test:
     <<: *defaults
@@ -39,9 +36,6 @@ jobs:
       - run:
           name: Run Unit Tests
           command: npm test
-      
-      - persist_to_workspace:
-          root: ~/repo
   
   lint:
     <<: *defaults
@@ -53,9 +47,6 @@ jobs:
       - run:
           name: Run Linting
           command: npm run lint
-      
-      - persist_to_workspace:
-          root: ~/repo
 
   build:
     <<: *defaults
@@ -67,9 +58,6 @@ jobs:
       - run:
           name: Build Typescript Code
           command: npm run build
-      
-      - persist_to_workspace:
-          root: ~/repo
 
 workflows:
   version: 2
