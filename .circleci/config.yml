@@ -80,6 +80,21 @@ jobs:
           name: Build Typescript Code
           command: npm run build
 
+  publish:
+    <<: *defaults
+
+    steps:
+      - attach_workspace:
+          at: ~/repo
+        
+      - run:
+          name: NPM Credentials
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+
+      - run:
+          name: NPM Publish
+          command: npm publish
+
 
 workflows:
   version: 2
@@ -100,3 +115,13 @@ workflows:
           requires:
             - test
             - lint
+
+      - publish:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+            tags:
+              only: /^v.*/
