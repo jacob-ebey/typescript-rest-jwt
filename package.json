@@ -7,8 +7,7 @@
   "scripts": {
     "build": "rimraf ./lib && rimraf ./dist && tsc -d",
     "test": "jest",
-    "lint": "tslint --project tsconfig.json",
-    "prepublish": "npm run build"
+    "lint": "tslint --project tsconfig.json"
   },
   "jest": {
     "transform": {
@@ -22,6 +21,10 @@
       "jsx",
       "json",
       "node"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/lib/"
     ]
   },
   "repository": {
