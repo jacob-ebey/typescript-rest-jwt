@@ -1,5 +1,7 @@
-TypeScript Rest JWT [![CircleCI](https://circleci.com/gh/jacob-ebey/typescript-rest-jwt/tree/master.svg?style=svg)](https://circleci.com/gh/jacob-ebey/typescript-rest-jwt/tree/master)
+TypeScript Rest JWT
 ===
+
+[![CircleCI](https://circleci.com/gh/jacob-ebey/typescript-rest-jwt.svg?style=svg)](https://circleci.com/gh/jacob-ebey/typescript-rest-jwt)
 
 JWT authentication for typescript-rest via decorators.
 
