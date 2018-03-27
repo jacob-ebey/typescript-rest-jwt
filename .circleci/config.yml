@@ -57,6 +57,10 @@ jobs:
       - run:
           name: Run Unit Tests
           command: npm test
+      
+      - persist_to_workspace:
+          root: ~/repo
+          <<: *whitelist
 
   coveralls:
     <<: *defaults
