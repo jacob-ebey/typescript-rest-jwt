@@ -1,0 +1,92 @@
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    # specify the version you desire here
+    - image: circleci/node:8.0
+
+version: 2
+jobs:
+  checkout:
+    <<: *defaults
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+
+      - run:
+          name: Install NPM Packages
+          command: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      
+      - persist_to_workspace:
+          root: ~/repo
+
+  test:
+    <<: *defaults
+
+    steps:
+      - attach_workspace:
+          at: ~/repo
+
+      - run:
+          name: Run Unit Tests
+          command: npm test
+      
+      - persist_to_workspace:
+          root: ~/repo
+  
+  lint:
+    <<: *defaults
+
+    steps:
+      - attach_workspace:
+          at: ~/repo
+
+      - run:
+          name: Run Linting
+          command: npm run lint
+      
+      - persist_to_workspace:
+          root: ~/repo
+
+  build:
+    <<: *defaults
+
+    steps:
+      - attach_workspace:
+          at: ~/repo
+
+      - run:
+          name: Build Typescript Code
+          command: npm run build
+      
+      - persist_to_workspace:
+          root: ~/repo
+
+workflows:
+  version: 2
+
+  build:
+    jobs:
+      - checkout
+
+      - test:
+          requires:
+            - checkout
+      
+      - lint:
+          requires:
+            - checkout
+      
+      - build:
+          requires:
+            - test
+            - lint

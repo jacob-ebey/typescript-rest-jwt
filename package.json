@@ -5,8 +5,10 @@
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
-    "prepublish": "rimraf ./lib && rimraf ./dist && tsc -d",
-    "test": "jest"
+    "build": "rimraf ./lib && rimraf ./dist && tsc -d",
+    "test": "jest",
+    "lint": "tslint --project tsconfig.json",
+    "prepublish": "npm run build"
   },
   "jest": {
     "transform": {
@@ -52,6 +54,7 @@
     "ts-jest": "^22.4.2",
     "ts-node": "^2.1.0",
     "ts-sinon": "^1.0.12",
+    "tslint": "^5.9.1",
     "tslint-config-standard": "^7.0.0",
     "typescript": "^2.1.0",
     "webpack": "^2.2.0",

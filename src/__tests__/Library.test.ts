@@ -6,7 +6,7 @@ import { AuthHandler, AuthPath } from '../'
 export class RootController {
   @AuthPath('/')
   @GET
-  public sayHello(): string {
+  public sayHello (): string {
     return 'Hello, World!'
   }
 
@@ -22,7 +22,7 @@ export class MockController {
 
   @AuthPath('/')
   @GET
-  public sayHello(): string {
+  public sayHello (): string {
     return 'Hello, World!'
   }
 
@@ -40,7 +40,6 @@ describe('AuthHandler', () => {
     }))
 
     const app = new AppMock()
-    const controller = new MockController()
 
     AuthHandler.configure(app, 'rofl')
 
