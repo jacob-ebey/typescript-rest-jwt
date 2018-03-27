@@ -102,19 +102,31 @@ workflows:
   build:
     jobs:
       - checkout
+          filters:
+            tags:
+                only: /.*/
 
       - test:
           requires:
             - checkout
+          filters:
+            tags:
+                only: /.*/
       
       - lint:
           requires:
             - checkout
+          filters:
+            tags:
+                only: /.*/
       
       - build:
           requires:
             - test
             - lint
+          filters:
+            tags:
+                only: /.*/
 
       - publish:
           requires:
