@@ -22,10 +22,15 @@
       "json",
       "node"
     ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/lib/"
+    ],
     "coveragePathIgnorePatterns": [
       "<rootDir>/node_modules/",
       "<rootDir>/lib/"
-    ]
+    ],
+    "collectCoverage": true
   },
   "repository": {
     "type": "git",

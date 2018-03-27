@@ -33,7 +33,7 @@ export class MockController {
   }
 }
 
-describe('AuthHandler', () => {
+describe('decorators', () => {
   it('Should build paths', () => {
     const AppMock = jest.fn<Application>(() => ({
       use: jest.fn()

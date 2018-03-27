@@ -29,20 +29,24 @@ export class AuthHandler {
     AuthHandler.cache.set(className, cache)
   }
 
-  public static configure (app: Application, options: string | expressJWT.Options) {
-    const ops = typeof options === 'string' ? {
-      secret: options,
-      credentialsRequired: true,
-      getToken: (req: Request) => {
-        if (req.headers.authorization && (req.headers.authorization as string).split(' ')[0] === 'Bearer') {
-          return (req.headers.authorization as string).split(' ')[1]
-        } else if (req.query && req.query.token) {
-          return req.query.token
-        }
-
-        return null
+  public static readonly createDefaultJWTOptions = (secret: string): expressJWT.Options => ({
+    secret,
+    credentialsRequired: true,
+    getToken: (req: Request): string | undefined => {
+      if (req.headers.authorization && (req.headers.authorization as string).split(' ')[0] === 'Bearer') {
+        return (req.headers.authorization as string).split(' ')[1]
+      } else if (req.query && req.query.token) {
+        return req.query.token
       }
-    } : options
+
+      return undefined
+    }
+  })
+
+  public static configure (app: Application, options: string | expressJWT.Options) {
+    const ops = typeof options === 'string'
+      ? AuthHandler.createDefaultJWTOptions(options)
+      : options
 
     AuthHandler.cache.forEach((cache: ICache) => {
       for (const route in cache) {
