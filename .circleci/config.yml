@@ -1,5 +1,4 @@
 defaults: &defaults
-  working_directory: ~/repo
   docker:
     # specify the version you desire here
     - image: circleci/node:8.0
@@ -30,9 +29,6 @@ jobs:
     <<: *defaults
 
     steps:
-      - attach_workspace:
-          at: ~/repo
-
       - run:
           name: Run Unit Tests
           command: npm test
@@ -41,9 +37,6 @@ jobs:
     <<: *defaults
 
     steps:
-      - attach_workspace:
-          at: ~/repo
-
       - run:
           name: Run Linting
           command: npm run lint
@@ -52,9 +45,6 @@ jobs:
     <<: *defaults
 
     steps:
-      - attach_workspace:
-          at: ~/repo
-
       - run:
           name: Build Typescript Code
           command: npm run build
