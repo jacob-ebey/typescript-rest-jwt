@@ -57,7 +57,18 @@ jobs:
       - run:
           name: Run Unit Tests
           command: npm test
-  
+
+  coveralls:
+    <<: *defaults
+
+    steps:
+      - attach_workspace:
+          at: ~/repo
+
+      - run:
+          name: Publish Test Results
+          command: npm run coveralls
+
   lint:
     <<: *defaults
 
@@ -86,7 +97,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/repo
-        
+
       - run:
           name: NPM Credentials
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
@@ -103,36 +114,41 @@ workflows:
     jobs:
       - checkout:
           filters:
-            tags:
-                only: /.*/
+            branches:
+              only: /.*/
 
       - test:
           requires:
             - checkout
           filters:
-            tags:
-                only: /.*/
-      
+            branches:
+              only: /.*/
+
+      - coveralls:
+          requires:
+            - test
+          filters:
+            branches:
+              only: /.*/
+
       - lint:
           requires:
             - checkout
           filters:
-            tags:
-                only: /.*/
-      
+            branches:
+              only: /.*/
+
       - build:
           requires:
             - test
             - lint
           filters:
-            tags:
-                only: /.*/
+            branches:
+              only: /.*/
 
       - publish:
           requires:
             - build
           filters:
             branches:
-              ignore: /.*/
-            tags:
-              only: /^v.*/
+              only: master

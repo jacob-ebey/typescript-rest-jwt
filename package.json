@@ -7,6 +7,7 @@
   "scripts": {
     "build": "rimraf ./lib && rimraf ./dist && tsc -d",
     "test": "jest",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
     "lint": "tslint --project tsconfig.json"
   },
   "jest": {
@@ -57,6 +58,7 @@
     "@types/express-jwt": "^0.0.38",
     "@types/jest": "^22.2.2",
     "awesome-typescript-loader": "^3.1.2",
+    "coveralls": "^3.0.0",
     "jest": "^22.4.3",
     "rimraf": "^2.5.2",
     "ts-jest": "^22.4.2",
