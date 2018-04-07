@@ -1,6 +1,6 @@
 {
   "name": "typescript-rest-jwt",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "JWT authentication for typescript-rest via decorators.",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
@@ -67,6 +67,7 @@
     "tslint": "^5.9.1",
     "tslint-config-standard": "^7.0.0",
     "typescript": "^2.1.0",
+    "typescript-rest-jwt": "^1.0.8",
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.0"
   }
