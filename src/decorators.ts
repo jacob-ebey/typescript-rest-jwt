@@ -13,6 +13,6 @@ export function AuthPath (path: string) {
   return function (target: any, propertyKey?: string, descriptor?: TypedPropertyDescriptor<any>) {
     AuthHandler.addPath(path, target, propertyKey)
 
-    Path(path)(target, propertyKey, descriptor)
+    return Path(path)(target, propertyKey, descriptor)
   }
 }

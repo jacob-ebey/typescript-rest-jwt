@@ -1,5 +1,5 @@
-import { Application } from 'express'
-import { GET, PathParam } from 'typescript-rest'
+import * as express from 'express'
+import { GET, POST, Path, PathParam } from 'typescript-rest'
 
 import { AuthHandler, AuthPath } from '../'
 
@@ -31,11 +31,17 @@ export class MockController {
   public sayHelloTo (@PathParam('name') name: string): string {
     return `Hello ${name}!`
   }
+
+  @AuthPath('/:name')
+  @POST
+  public postHelloTo (@PathParam('name') name: string): string {
+    return `Said hello to ${name}!`
+  }
 }
 
 describe('decorators', () => {
   it('Should build paths', () => {
-    const AppMock = jest.fn<Application>(() => ({
+    const AppMock = jest.fn<express.Application>(() => ({
       use: jest.fn()
     }))
 
@@ -46,7 +52,7 @@ describe('decorators', () => {
     expect(app.use).toHaveBeenCalledTimes(4)
     expect(app.use).toHaveBeenCalledWith('/', expect.any(Function))
     expect(app.use).toHaveBeenCalledWith('/:name', expect.any(Function))
-    expect(app.use).toHaveBeenCalledWith('/hello/', expect.any(Function))
+    expect(app.use).toHaveBeenCalledWith('/hello', expect.any(Function))
     expect(app.use).toHaveBeenCalledWith('/hello/:name', expect.any(Function))
   })
 })
