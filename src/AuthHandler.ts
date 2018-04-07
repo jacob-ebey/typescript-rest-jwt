@@ -18,7 +18,7 @@ export class AuthHandler {
 
       props.forEach((p: string) => {
         if (p !== 'constructor' && p in cache) {
-          cache[p] = `${path}${cache[p]}`
+          cache[p] = `${path}${cache[p]}`.replace(/\/+$/, '')
         }
       })
 
@@ -48,11 +48,17 @@ export class AuthHandler {
       ? AuthHandler.createDefaultJWTOptions(options)
       : options
 
+    const unique = new Set<string>()
+
     AuthHandler.cache.forEach((cache: ICache) => {
       // tslint:disable-next-line forin
       for (const route in cache) {
-        app.use(cache[route], expressJWT(ops))
+        unique.add(cache[route])
       }
+    })
+
+    unique.forEach((route: string) => {
+      app.use(route, expressJWT(ops))
     })
   }
 }
