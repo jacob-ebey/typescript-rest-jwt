@@ -1,1 +1,9 @@
-lib/__tests__
+__tests__/
+.circleci/
+node_modules/
+src/
+
+.gitignore
+preprocessor.js
+tsconfig.json
+tslint.json
